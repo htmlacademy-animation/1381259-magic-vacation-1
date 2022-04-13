@@ -1479,7 +1479,8 @@ img {
 
 .form__field {
   flex: none;
-  padding: 0 5.6rem;
+  padding: 0;
+  width: 0;
   height: 6rem;
   text-transform: uppercase;
   font: inherit;
@@ -1489,15 +1490,8 @@ img {
   border: 0;
   border-radius: 3rem;
   outline: none;
-  animation: appearFromRight 0.5s forwards;
-}
-@keyframes appearFromRight {
-  0% {
-    width: 0;
-  }
-  100% {
-    width: 100%;
-  }
+  transition-property: width, padding;
+  transition-duration: 0.5s, 0.5s;
 }
 .form__field:focus {
   border: 1px solid #a67ee5;
@@ -1523,6 +1517,12 @@ img {
     height: 4rem;
     font-size: 1.6rem;
   }
+}
+
+.screen--game.active .form__field {
+  width: 100%;
+  padding: 0 5.6rem;
+  transition-delay: 0s, 0.25s;
 }
 
 .form__button {
@@ -1851,20 +1851,10 @@ img {
   text-transform: uppercase;
   font-size: 2.4rem;
   line-height: 1.27;
-  animation: fadeIn 1.5s;
-}
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  70% {
-    opacity: 0;
-    transform: translateY(2rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  transform: translateY(1.5rem);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+  transition-delay: 1s;
 }
 @media (min-width: 2000px) {
   .intro__message {
@@ -1908,6 +1898,11 @@ img {
     width: 1.1rem;
     height: 1.1rem;
   }
+}
+
+.screen.active .intro__message {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .intro__label {
@@ -3963,7 +3958,7 @@ img {
   background-color: #ffffff;
   border: 2px solid #ffffff;
   z-index: -1;
-  transition: width 0.3s, height 0.3s;
+  transition: transform 0.3s;
 }
 .social-block__toggler svg {
   position: absolute;
@@ -3978,8 +3973,7 @@ img {
   color: #a67ee5;
 }
 .social-block__toggler:hover::before, .social-block--active .social-block__toggler::before {
-  width: 112.5%;
-  height: 112.5%;
+  transform: scale(1.1247) translate(-44%, -44%);
 }
 .social-block__toggler:focus {
   color: #ffffff;
